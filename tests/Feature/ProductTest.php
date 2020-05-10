@@ -20,6 +20,7 @@ class ProductTest extends TestCase
         $this->product = Product::create([
             'name' => 'Pizza 1',
             'price' => 9.99,
+            'description' => 'Description of the pizza 1',
         ]);
     }
 
@@ -33,5 +34,11 @@ class ProductTest extends TestCase
     function a_product_has_a_price()
     {
         $this->assertEquals(9.99, $this->product->price);
+    }
+
+    /** @test */
+    function a_product_has_a_description()
+    {
+        $this->assertEquals('Description of the pizza 1', $this->product->description);
     }
 }
