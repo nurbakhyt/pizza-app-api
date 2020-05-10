@@ -15,9 +15,14 @@ class ApiReponsesTest extends TestCase
     /** @test */
     function products_response_is_ok()
     {
+        $pizza = factory(Product::class)->create();
+
         $response = $this->get('/api/products');
 
-        $response->assertStatus(200);
+        $response->assertStatus(200)
+            ->assertJsonFragment([
+                'name' => $pizza->name,
+            ]);
     }
 
     /** @test */
@@ -35,6 +40,9 @@ class ApiReponsesTest extends TestCase
 
         $response = $this->json('post', 'api/orders', $data);
 
-        $response->assertStatus(201);
+        $response->assertStatus(201)
+            ->assertJsonFragment([
+                'address' => $order['address'],
+            ]);
     }
 }
